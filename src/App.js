@@ -2,15 +2,16 @@ import React from 'react';
 import './App.css';
 import styled from '@emotion/styled';
 import cyptocurrency from './images/cryptomonedas.png';
+import Form from './Components/Form'
 
 const Container = styled.div`
 
-max-width: 900px,
+max-width: 900px;
 margin: 0 auto;
 @media (min-width:992px) {
   display:grid;
   grid-template-columns: repeat(2,1fr);
-  columnt-gap: 2rem;
+  column-gap: 2rem;
 }
 `;
 
@@ -33,7 +34,7 @@ const Heading = styled.h1`
     content: '';
     width: 100px;
     height: 2px;
-    background-color: #a6d027;
+    background-color: #dbde1b;
     display: block;
   }
 `;
@@ -49,6 +50,7 @@ function App() {
       </div>
       <div>
         <Heading>Cryptocurrency analysis</Heading>
+        <Form/>
       </div>
     </Container>
   );
