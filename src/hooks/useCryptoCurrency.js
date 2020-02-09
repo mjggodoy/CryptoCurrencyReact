@@ -1,5 +1,5 @@
 import React, {Fragment, useState} from 'react';
-import { render } from '@testing-library/react';
+//import { render } from '@testing-library/react';
 import styled from '@emotion/styled';
 
 const LabelCrypto = styled.label`
@@ -21,19 +21,22 @@ const SelectCrypto= styled.select`
     font-size: 1.0rem;
 `;
 const UseCryptoCurrency = (label, cryptocurrencies) => {
-    const [state, updateState] = useState();
+    const [stateCurrency, updateState, updateCryptoState] = useState();
     const SelectCryptoCurrency = () => (
         <Fragment>
             <LabelCrypto>{label}</LabelCrypto>
-            <SelectCrypto>
-                <option>--Select cryptocurrency--</option>
+            <SelectCrypto
+            onChange = {e => updateState(e.target.value)}
+            value = {stateCurrency}
+            >
+            <option>--Select cryptocurrency--</option>
                 {Object.entries(cryptocurrencies).map(([key, value]) => {
-                     return(<option key={key} type={value.CoinInfo.Name}>{value.CoinInfo.Name}</option>);
+                     return(<option key={key} type={value.CoinInfo.Id}>{value.CoinInfo.Name}</option>);
                 })}
             </SelectCrypto>
         </Fragment>
     );
-    return ([state, SelectCryptoCurrency, updateState]);
+    return ([stateCurrency, SelectCryptoCurrency, updateCryptoState]);
 }
 
 export default UseCryptoCurrency;

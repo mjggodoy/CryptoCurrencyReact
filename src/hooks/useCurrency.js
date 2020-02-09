@@ -1,5 +1,5 @@
 import React, {Fragment, useState} from 'react';
-import { render } from '@testing-library/react';
+//import { render } from '@testing-library/react';
 import styled from '@emotion/styled';
 
 const Label = styled.label`
@@ -21,14 +21,13 @@ const Select = styled.select`
     font-size: 1.0rem;
 `;
 const UseCurrency = (label, currencies) => {
-    const [state, updateState] = useState();
+    const [stateCurrency, updateState] = useState();
     const SelectCurrency = () => (
         <Fragment>
             <Label>{label}</Label>
             <Select
-            onChange = {e => 
-                updateState(e.target.value)
-            }
+            onChange = {e => updateState(e.target.value)}
+            value = {stateCurrency}
             >
             <option>--Select currency--</option>
                 {Object.entries(currencies).map(([key, value]) => {
@@ -37,7 +36,7 @@ const UseCurrency = (label, currencies) => {
             </Select>
         </Fragment>
     );
-    return ([state, SelectCurrency, updateState]);
+    return ([stateCurrency, SelectCurrency, updateState]);
 }
 
 export default UseCurrency;
