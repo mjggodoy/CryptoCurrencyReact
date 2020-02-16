@@ -4,9 +4,11 @@ import styled from '@emotion/styled';
 import cyptocurrency from './images/cryptomonedas.png';
 import Form from './Components/Form'
 import axios from 'axios';
-import Analysis from './Components/Analysis'
-const Container = styled.div`
+import Analysis from './Components/Analysis';
+import Spinner from './Components/Spinner'
 
+
+const Container = styled.div`
 max-width: 900px;
 margin: 0 auto;
 @media (min-width:992px) {
@@ -43,14 +45,19 @@ function App() {
   const [currency, saveCurrencyApp] = useState('');
   const [crypto, saveCryptoCurrencyApp] = useState('');
   const [analysisCurrency, saveAnalysisCurrency] = useState({});
+  const [spinner, saveSpinner] = useState(false);
 
   useEffect(() => {
     const apiRequest = async() => {
         const url = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${crypto}&tsyms=${currency}`;
         const response = await axios.get(url).
         then(response => {
+          saveSpinner(true);
           const equivalent = response.data.RAW[crypto][currency];
-          saveAnalysisCurrency(equivalent);
+          setTimeout(() => {
+            saveSpinner(false);
+            saveAnalysisCurrency(equivalent);
+          }, 5000);
         })
         .catch(error => {
           console.log(error);
@@ -60,6 +67,8 @@ function App() {
       apiRequest();
     }
   }, [currency, crypto]);
+
+  const component = (spinner) ? <Spinner/> : <Analysis analysisCurrency = {analysisCurrency} />
 
   return (
     <Container>
@@ -73,6 +82,7 @@ function App() {
         <Heading>Cryptocurrency analysis</Heading>
         <Form saveCurrencyApp={saveCurrencyApp} saveCryptocurrencyApp={saveCryptoCurrencyApp} />
         <Analysis analysisCurrency = {analysisCurrency} />
+        {component}
       </div>
     </Container>
   );
