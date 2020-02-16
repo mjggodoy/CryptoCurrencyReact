@@ -31,7 +31,7 @@ const UseCurrency = (label, currencies) => {
             >
             <option>--Select currency--</option>
                 {Object.entries(currencies).map(([key, value]) => {
-                    return(<option key={key} type={value.code}>{value.name}</option>);
+                    return(<option key={key} type={value.code} value={value.code}>{value.name}</option>);
                 })}
             </Select>
         </Fragment>

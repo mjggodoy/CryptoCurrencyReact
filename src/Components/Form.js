@@ -6,6 +6,7 @@ import UseCurrency from './../hooks/useCurrency';
 import UseCryptoCurrency from './../hooks/useCryptoCurrency';
 import axios from 'axios';
 import Error from './../Components/Error';
+import Analysis from './Analysis';
 
 const ButtonInput = styled.input`
     margin-top: 20px;
@@ -24,7 +25,7 @@ const ButtonInput = styled.input`
     }
 `;
 
-const Form = () => {
+const Form = ({saveCurrencyApp, saveCryptocurrencyApp}) => {
 
     const [cryptoCurrencylist, saveCryptocurrency] = useState([]);
     const [error, saveError] = useState(false);
@@ -50,15 +51,15 @@ const Form = () => {
     const analyzeCurrency = e => {
         e.preventDefault();
         var validation = false;
-        if (stateCrypto === undefined && stateCurrency === undefined){
+        if (stateCrypto === undefined || stateCurrency === undefined){
             validation = true;
         } 
-        else if (stateCrypto === undefined || stateCurrency === undefined) {
-            validation = false;
-        } else {
+        else {
             validation = false;
         }
         saveError(validation);
+        saveCurrencyApp(stateCurrency);
+        saveCryptocurrencyApp(stateCrypto);
     }
 
     return (
