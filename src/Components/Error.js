@@ -5,7 +5,7 @@ const ErrorParagraph = styled.p`
     background-color: #b7322c;
     padding: 1rem;
     color: #181e23;
-    font-size: 30px;
+    font-size: 20px;
     text-transform: uppercase;
     font-weight: bold;
     text-align: center;
